@@ -12,6 +12,10 @@ var data;
 
 function init() {
     storage = window.localStorage;
+    document.addEventListener("deviceready",onDeviceReady,false);
+}
+function onDeviceReady(){
+  ;
 }
 // on etn submit handler
 function processForm(){
@@ -44,14 +48,20 @@ function requestData(){
     request.onload = function(){
         data = JSON.parse(request.responseText);
         var curr = data.charts.hashrate.length -1;
-        console.log(data.charts.hashrate[curr]["1"]);
-        console.log(average);
         if(data.charts.hashrate[curr]["1"] < average){
-            console.log("hello");
+            notify(); //send notification here
         }
        calc_avg_hash();
     };
     request.send();
         
-    setTimeout(requestData,10000); //600000
+    setTimeout(requestData,600000); //10m
+}
+//sends notification
+function notify(){
+    cordova.plugins.notification.local.schedule({
+        id         : 1,
+        title      : 'Your hash rate has dropped!',
+        text       : 'Go find out what went wrong',
+    });
 }

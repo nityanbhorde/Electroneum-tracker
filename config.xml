@@ -24,5 +24,7 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="https://github.com/Telerik-Verified-Plugins/LocalNotification" />
     <engine name="browser" spec="~5.0.3" />
+    <engine name="android" spec="~7.0.0" />
 </widget>
